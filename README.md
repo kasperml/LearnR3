@@ -1,7 +1,7 @@
 Kasper Munch Lauridsen
 Diabetes biomarkers
 
-Hey there!
+Hey there!:)
 
 TODO: Add more to the title of your project here
 
