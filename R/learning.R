@@ -14,3 +14,5 @@ mean(2:6)
 # Loading packages --------------------------------------------------------
 
 library(tidyverse)
+
+# Conflict!
