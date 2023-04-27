@@ -59,22 +59,24 @@ Flow cytometri billede @fig-flow-cytometry!
 
 ```{r}
 # Create histogram for BMI
-nhanes_small %>% 
-ggplot(aes(x=bmi)) + geom_histogram()
+nhanes_small %>%
+  ggplot(aes(x = bmi)) +
+  geom_histogram()
 ```
 
 ```{r}
 # Create histogram of BMI
-nhanes_small %>% 
-    ggplot(aes(x=bmi)) + geom_histogram(na.rm = TRUE)
+nhanes_small %>%
+  ggplot(aes(x = bmi)) +
+  geom_histogram(na.rm = TRUE)
 ```
 
 ```{r}
 # Create histogram of BMI
-nhanes_small %>% 
-    filter(bmi <= 60) %>% 
-    ggplot(aes(x=bmi)) + geom_histogram(na.rm = TRUE)
-
+nhanes_small %>%
+  filter(bmi <= 60) %>%
+  ggplot(aes(x = bmi)) +
+  geom_histogram(na.rm = TRUE)
 ```
 BMI distribution in NHANES dataset was visualised in @fig-bmi-histo
 
@@ -83,49 +85,88 @@ BMI distribution in NHANES dataset was visualised in @fig-bmi-histo
 #| fig-cap: "Distribution of BMI"
 #| label: fig-bmi-histo
 # Create histogram of BMI
-nhanes_small %>% 
-    filter(bmi <= 60) %>% 
-    ggplot(aes(x=bmi)) + geom_histogram(na.rm = TRUE)
+nhanes_small %>%
+  filter(bmi <= 60) %>%
+  ggplot(aes(x = bmi)) +
+  geom_histogram(na.rm = TRUE)
 ```
 
 # Create barplot for counts of education 
 
 ```{r}
-nhanes_small %>% 
-    filter(!is.na(education)) %>% 
-    ggplot(aes(x= education)) +
-    geom_bar()
+nhanes_small %>%
+  filter(!is.na(education)) %>%
+  ggplot(aes(x = education)) +
+  geom_bar()
 ```
 
 ```{r}
-nhanes_small %>% 
-    filter(!is.na(diabetes)) %>% 
-    ggplot(aes(x= diabetes)) +
-    geom_bar()
+nhanes_small %>%
+  filter(!is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes)) +
+  geom_bar()
 ```
 ```{r}
-nhanes_small %>% 
-    filter(!is.na(diabetes)) %>% 
-    ggplot(aes(x= diabetes)) +
-    geom_bar()
+nhanes_small %>%
+  filter(!is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes)) +
+  geom_bar()
 ```
 
 ```{r}
 #| label: fig-diabetes_education
 #| fig-cap: "Counts of diabetes and education in NHANES"
-#| fig-subcap: 
+#| fig-subcap:
 #|   - "Number of those wit or without diabetes"
 #|   - "Number of those with different educational status."
 #| layout-ncol: 2
 
-nhanes_small %>% 
-    filter(!is.na(diabetes)) %>% 
-    ggplot(aes(x=diabetes)) + 
-    geom_bar()
+nhanes_small %>%
+  filter(!is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes)) +
+  geom_bar()
 
-nhanes_small %>% 
-    filter(!is.na(education)) %>% 
-    ggplot(aes(x=education)) + 
-    geom_bar()
+nhanes_small %>%
+  filter(!is.na(education)) %>%
+  ggplot(aes(x = education)) +
+  geom_bar()
+```
+## Plotting two variables
 
+```{r}
+nhanes_small %>%
+  ggplot(aes(x = bmi, y = bp_sys_ave)) +
+  geom_hex(na.rm = TRUE)
+```
+
+```{r}
+# Add af smoothing line with confidence interval
+ggplot(nhanes_small, aes(x = bmi, y = bp_sys_ave)) +
+  geom_hex(na.rm = TRUE) +
+  geom_smooth(na.rm = TRUE)
+```
+```{r}
+# Two categorical variables
+nhanes_small %>%
+  filter(!is.na(education), !is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes, fill = education)) +
+  geom_bar()
+```
+```{r}
+# Two categorical variables
+nhanes_small %>%
+  filter(!is.na(education), !is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes, fill = education)) +
+  geom_bar(position = position_dodge())
+```
+
+# Plotting continuous and discrete variables
+
+```{r}
+# Using mixed data
+
+nhanes_small %>%
+  filter(!is.na(diabetes), bmi <= 60) %>%
+  ggplot(aes(x = diabetes, y = bmi)) +
+  geom_violin(na.rm = TRUE)
 ```
