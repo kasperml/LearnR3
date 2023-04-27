@@ -2,6 +2,7 @@
 title: "Reproducible document"
 author: "Kasper Munch Lauridsen"
 format: html
+theme: yeti
 ---
 
 ```{r setup}
@@ -49,3 +50,10 @@ nhanes_small %>%
   ) %>%
   knitr::kable(caption = "Mean values of Age and BMI for each education and diabetes status.")
 ```
+
+Flow cytometri billede @fig-flow-cytometry!
+
+![Billede af flow cytometer](images/flow111-1.gif){#fig-flow-cytometry width="50%" height="50%"}
+
+
+
