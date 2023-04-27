@@ -55,5 +55,77 @@ Flow cytometri billede @fig-flow-cytometry!
 
 ![Billede af flow cytometer](images/flow111-1.gif){#fig-flow-cytometry width="50%" height="50%"}
 
+## Visualizing data 
+
+```{r}
+# Create histogram for BMI
+nhanes_small %>% 
+ggplot(aes(x=bmi)) + geom_histogram()
+```
+
+```{r}
+# Create histogram of BMI
+nhanes_small %>% 
+    ggplot(aes(x=bmi)) + geom_histogram(na.rm = TRUE)
+```
+
+```{r}
+# Create histogram of BMI
+nhanes_small %>% 
+    filter(bmi <= 60) %>% 
+    ggplot(aes(x=bmi)) + geom_histogram(na.rm = TRUE)
+
+```
+BMI distribution in NHANES dataset was visualised in @fig-bmi-histo
 
 
+```{r}
+#| fig-cap: "Distribution of BMI"
+#| label: fig-bmi-histo
+# Create histogram of BMI
+nhanes_small %>% 
+    filter(bmi <= 60) %>% 
+    ggplot(aes(x=bmi)) + geom_histogram(na.rm = TRUE)
+```
+
+# Create barplot for counts of education 
+
+```{r}
+nhanes_small %>% 
+    filter(!is.na(education)) %>% 
+    ggplot(aes(x= education)) +
+    geom_bar()
+```
+
+```{r}
+nhanes_small %>% 
+    filter(!is.na(diabetes)) %>% 
+    ggplot(aes(x= diabetes)) +
+    geom_bar()
+```
+```{r}
+nhanes_small %>% 
+    filter(!is.na(diabetes)) %>% 
+    ggplot(aes(x= diabetes)) +
+    geom_bar()
+```
+
+```{r}
+#| label: fig-diabetes_education
+#| fig-cap: "Counts of diabetes and education in NHANES"
+#| fig-subcap: 
+#|   - "Number of those wit or without diabetes"
+#|   - "Number of those with different educational status."
+#| layout-ncol: 2
+
+nhanes_small %>% 
+    filter(!is.na(diabetes)) %>% 
+    ggplot(aes(x=diabetes)) + 
+    geom_bar()
+
+nhanes_small %>% 
+    filter(!is.na(education)) %>% 
+    ggplot(aes(x=education)) + 
+    geom_bar()
+
+```
