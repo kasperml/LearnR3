@@ -270,3 +270,23 @@ nhanes_small %>%
     )
 ```
 
+### Exercise for changing colours
+
+```{r}
+base_scatterplot <- nhanes_small %>%
+  filter(!is.na(diabetes), !is.na(education)) %>% 
+  ggplot(aes(x = bmi, y = bp_sys_ave, colour = age)) +
+  geom_point(na.rm = TRUE) +
+  facet_grid(
+    rows = vars(diabetes),
+    cols = vars(education)
+  ) +
+  scale_color_viridis_c()
+```
+
+```{r}
+base_scatterplot + theme_minimal()
+```
+
+
+
